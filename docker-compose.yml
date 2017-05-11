@@ -1,0 +1,25 @@
+---
+version: '3'
+
+networks:
+  microservice-poc-network:
+
+services:
+  dropwizard_example:
+    image: usgs/dropwizard_example
+    build:
+      context: ./Dropwizard/dropwizard-example
+    networks:
+      microservice-poc-network:
+        aliases:
+          - dropwizard_example
+    ports:
+      - "8080:8080"
+      - "8081:8081"
+      - "8443:8443"
+      - "8444:8444"
+    container_name: dropwizard_example
+    volumes:
+      - ./Dropwizard/configs/:/configs
+    env_file:
+      - "compose${POC_COMPOSE_ENV_LOCAL}.env"

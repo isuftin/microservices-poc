@@ -23,3 +23,14 @@ services:
       - ./Dropwizard/configs/:/configs
     env_file:
       - "compose${POC_COMPOSE_ENV_LOCAL}.env"
+  python_example:
+    image: usgs/falconhello
+    build:
+      context: ./falcon-hello-world
+    networks:
+      microservice-poc-network:
+        aliases:
+          - python_example
+    ports:
+      - "5040:7010"
+    container_name: python_example

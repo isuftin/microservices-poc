@@ -53,7 +53,7 @@ performs the execution of the contents on the guest.
 Because I want to create multiple machines and send the certificate to all of them,
 it would be tedious to do this multiple times. I can just run a script to do this.
 
-The following script creates four machines named `master1`, `worker1`, `worker2`
+The [following script](./multi-create.sh) creates four machines named `master1`, `worker1`, `worker2`
 and `worker3`
 
 ```bash
@@ -299,7 +299,7 @@ This node joined a swarm as a worker.
 
 This should be done on all available workers.
 
-This process can be sped up by running the following script in a new terminal:
+This process can be sped up by running the [following script](./multi-worker-join.sh) in a new terminal:
 ```bash
 
 #!/bin/bash
@@ -344,7 +344,7 @@ kc1em7wydv9d8fzoz11pc14lm     worker2             Ready               Active
 
 Note that the single manager has been automatically elected as a leader.
 
-#### Deploying a service to the swarm
+### Deploying a service to the swarm
 
 Now that I have a swarm, I want to create the simplest service possible. I will
 log into my manager1 guest and create a service:
@@ -374,7 +374,7 @@ ID                  NAME                MODE                REPLICAS            
 l0ewxfdek3cl        helloping           replicated          1/1                 alpine:latest
 ```
 
-#### Inspecting swarm services
+### Inspecting swarm services
 
 While still on the manager node, I can inspect a service in human readable format:
 
@@ -424,7 +424,7 @@ CONTAINER ID        IMAGE               COMMAND             CREATED             
 640538a0c18c        alpine:latest       "ping docker.com"   11 minutes ago      Up 11 minutes                           helloping.1.6evig1m1a7a2skvmtk1af6ef6
 ```
 
-#### Scaling a service
+### Scaling a service
 
 Now that I have a single worker running a service, I may want to scale that service
 out to multiple nodes. This is done using the `docker service scale` command. When
@@ -485,7 +485,7 @@ node is no longer running the helloping service and it shows the service in a sh
 state on that node. I also see that the other workers have picked up the slack to
 maintain a scale level of 10.
 
-#### Deleting the service
+### Deleting the service
 
 It's just as easy to remove a service from the cluster.  On the manager node, I
 can simply issue:
@@ -500,7 +500,7 @@ no such services: helloping
 
 My cluster is now not running the helloping service.
 
-#### Rolling service updates through a cluster
+### Rolling service updates through a cluster
 
 In a clustered environment, I want to be able to roll my updates throughout the
 cluster. In my case,
@@ -524,7 +524,7 @@ $ curl "http://$(docker-machine ip manager1)/" -sI | grep -Fi Server
 Server: nginx/1.12.0
 ```
 
-#### A brief talk about networking in Swarm...
+### A brief talk about networking in Swarm...
 
 One thing to note here. Remember that the manager1 node does not run the service.
 
@@ -587,7 +587,7 @@ nginx.4.kw0z2pi9y8kg@worker2     | 10.255.0.2 - - [19/May/2017:18:59:22 +0000] "
 Note that the HTTP request went to random workers in the swarm and never hit the
 manager1 node.
 
-#### Back to rolling updates
+### Back to rolling updates
 
 Now that I know my service is running and is testable that it's serving version
 1.12.0 of NGINX, I can begin updating. I want to update the NGINX server that's being

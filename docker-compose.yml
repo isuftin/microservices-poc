@@ -26,7 +26,7 @@ services:
   python_example:
     image: usgs/falconhello
     build:
-      context: ./falcon-hello-world
+      context: ./Falcon
     networks:
       microservice-poc-network:
         aliases:

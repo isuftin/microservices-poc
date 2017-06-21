@@ -1,1 +1,4 @@
-bind = '0.0.0.0:7010'
+import os
+
+
+bind = '{0}:{1}'.format(os.getenv('bind_ip'), os.getenv('bind_port'))
